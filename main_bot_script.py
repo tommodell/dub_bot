@@ -22,6 +22,8 @@ async def on_message(message):
         newName = message.channel.name[:message.channel.name.index('x')+1] + str(numDubs)
         print("newName = " + newName)
         try:
+            msg = "Congratulations {0.author.mention}! New win total is: ".format(message) + numDubs 
+            await client.send_message(message.channel, msg)
             await client.edit_channel(channel = message.channel, name=newName)
         except:
             print("exception")
