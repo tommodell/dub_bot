@@ -16,12 +16,14 @@ async def on_message(message):
         print("hello")
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith('!dub') and message.channel.name.startswith('swamp'):
+    if message.content.startswith('!dub'):
         print("recieved dub")
         numDubs = int(message.channel.name[message.channel.name.index('x')+1:]) + 1
         newName = message.channel.name[:message.channel.name.index('x')+1] + str(numDubs)
         print("newName = " + newName)
         try:
+            msg = ("Congratulations {0.author.mention}! New win total is: " + str(numDubs)).format(message)  
+            await client.send_message(message.channel, msg)
             await client.edit_channel(channel = message.channel, name=newName)
         except:
             print("exception")
